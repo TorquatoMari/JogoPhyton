@@ -31,7 +31,7 @@ class Menu:
                 else:
                     self.menu_text(text_size=20, text=MENU_OPTION[i], text_color=COLOR_WHITE,text_center_pos=((WIN_WIDTH / 2), 400 + 30 * i))  # impressao dinamica
 
-
+            pygame.display.flip()
 
             for event in pygame.event.get():  # retorna todos os eventos
               if event.type == pygame.QUIT:  # evento de fechar janela
@@ -50,9 +50,11 @@ class Menu:
                      else:
                           menu_option = len(MENU_OPTION)-1
 
+                  if event.key == pygame.K_RETURN: #Enter
+                      return MENU_OPTION[menu_option]
 
 
-            pygame.display.flip()
+
 
 
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
