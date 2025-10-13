@@ -1,0 +1,16 @@
+#C
+COLOR_WHITE=(255,255,255)
+COLOR_BLUE=(109,157,197)
+
+#M
+MENU_OPTION=('NEW GAME',
+             'SCORE',
+             'EXIT')
+
+
+#W
+WIN_WIDTH=1280
+WIN_HEIGHT=720
+
+
+
