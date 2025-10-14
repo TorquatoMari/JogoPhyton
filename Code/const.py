@@ -2,10 +2,16 @@
 COLOR_WHITE=(255,255,255)
 COLOR_BLUE=(109,157,197)
 
+
+
 #M
 MENU_OPTION=('NEW GAME',
              'SCORE',
              'EXIT')
+
+#P
+PLAYER_SPEED=5
+
 
 
 #W
