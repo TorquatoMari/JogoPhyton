@@ -2,13 +2,17 @@
 # -*- coding: utf-8 -*-
 import pygame.key
 
-from Code.const import PLAYER_SPEED, WIN_HEIGHT, WIN_WIDTH
+from Code.const import PLAYER_SPEED, WIN_HEIGHT, WIN_WIDTH, ENTITY_HEALTH, DEFAULT_HP
 from Code.entity import Entity
 
 
 class Player(Entity):
     def __init__(self,name=str,position=tuple):
         super().__init__(name,position)
+        base_hp = ENTITY_HEALTH.get(name, DEFAULT_HP)
+        self.max_health = base_hp
+        self.health = base_hp
+
 
 
     def move(self, ):
