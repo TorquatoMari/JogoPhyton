@@ -12,6 +12,7 @@ from Code.EntityMediator import EntityMediator
 from Code.const import COLOR_WHITE, WIN_HEIGHT, EVENT_ENEMY
 from Code.entityFactory import EntityFactory
 from Code.entity import Entity
+from Code.player import Player
 
 
 class Level:
@@ -35,9 +36,10 @@ class Level:
             for ent in self.entity_list:
                 self.window.blit(source=ent.surf,dest=ent.rect)
                 ent.move()
-
-
-
+                if isinstance(ent,(Player)):
+                    shot=ent.shot()
+                    if shot is not None:
+                       self.entity_list.append(shot)
             for event in pygame.event.get():
                 if event.type==pygame.QUIT:
                     pygame.quit()

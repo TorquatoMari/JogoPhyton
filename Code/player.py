@@ -2,13 +2,15 @@
 # -*- coding: utf-8 -*-
 import pygame.key
 
-from Code.const import PLAYER_SPEED, WIN_HEIGHT, WIN_WIDTH, ENTITY_HEALTH, DEFAULT_HP
+from Code.PlayerShot import PlayerShot
+from Code.const import PLAYER_SPEED, WIN_HEIGHT, WIN_WIDTH, ENTITY_HEALTH, DEFAULT_HP, ENTITY_SHOT_DELAY
 from Code.entity import Entity
 
 
 class Player(Entity):
     def __init__(self,name=str,position=tuple):
         super().__init__(name,position)
+        self.shot_delay=ENTITY_SHOT_DELAY[self.name]
         base_hp = ENTITY_HEALTH.get(name, DEFAULT_HP)
         self.max_health = base_hp
         self.health = base_hp
@@ -27,3 +29,10 @@ class Player(Entity):
             self.rect.centerx += PLAYER_SPEED
         pass
 
+    def shot(self):
+        self.shot_delay-=1
+        if self.shot_delay==0:
+            self.shot_delay=ENTITY_SHOT_DELAY[self.name]
+            pressed_key=pygame.key.get_pressed()
+            if pressed_key[pygame.K_RCTRL]:
+               return PlayerShot(name=f'{self.name}Shot', position=(self.rect.centerx,self.rect.centery))
