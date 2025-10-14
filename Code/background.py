@@ -12,4 +12,4 @@ class Background(Entity):
         self.rect.centerx -=1
         if self.rect.right<=0:
             self.rect.left=WIN_WIDTH
-        pass
+
