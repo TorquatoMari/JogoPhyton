@@ -32,7 +32,12 @@ class Level:
         pygame.mixer_music.play(-1)
         clock=pygame.time.Clock()
         while True:
-            clock.tick(60)
+            dt=clock.tick(60)/1000.0
+
+            player = next((e for e in self.entity_list if isinstance(e, Player)), None)
+            if player:
+                player.update_timers(dt)
+
             for ent in self.entity_list:
                 self.window.blit(source=ent.surf,dest=ent.rect)
                 ent.move()
@@ -40,8 +45,9 @@ class Level:
                     shot=ent.shot()
                     if shot is not None:
                        self.entity_list.append(shot)
+
                 if ent.name == 'Player':
-                    self.level_text(text=f'Player - Health: {ent.health}',text_size=14,text_color=COLOR_WHITE,text_pos=(10, 25),)
+                    self.level_text(text=f'Player - Health: {ent.health} Score: {getattr(ent, "score", 0)}',text_size=14,text_color=COLOR_WHITE,text_pos=(10, 25),)
             for event in pygame.event.get():
                 if event.type==pygame.QUIT:
                     pygame.quit()

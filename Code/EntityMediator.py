@@ -1,3 +1,4 @@
+from Code import enemy
 from Code.PlayerShot import PlayerShot
 from Code.const import WIN_WIDTH
 from Code.enemy import Enemy
@@ -36,8 +37,16 @@ class EntityMediator:
             ):
                 # identifica quem é quem
                 enemy, player = (ent1, ent2) if isinstance(ent1, Enemy) else (ent2, ent1)
+                dmg=getattr(enemy,'damage',0)
+
+                # usa i-frames do Player (não reduz HP a cada frame de contato)
+                if hasattr(player, "take_hit"):
+                    player.take_hit(dmg)
+                else:
+                    # fallback se take_hit ainda não existir
+                    player.health -= dmg
+
                 # aplica dano ao player com base no dano do inimigo (asteroide)
-                player.health -= getattr(enemy, "damage", 0)
                 player.last_dmg = enemy.name
             return  # evita cair no bloco abaixo
 
@@ -52,6 +61,18 @@ class EntityMediator:
                 ent2.health-=ent1.damage
                 ent1.last_dmg=ent2.name
                 ent2.last_dmg=ent1.name
+
+    @staticmethod
+    def __give_score(enemy: Enemy, entity_list: list[Entity]) -> None:
+        player = next((e for e in entity_list if isinstance(e, Player)), None)
+        if player is not None:
+            pts = getattr(enemy, "score", getattr(enemy, "points", 100))
+            if not hasattr(player, "score"):
+               player.score = 0
+            player.score += int(pts)
+
+
+
     @staticmethod
     def verify_collision(entity_list: list[Entity]):
         for i in range(len(entity_list)):
@@ -63,8 +84,11 @@ class EntityMediator:
 
     @staticmethod
     def verify_health(entity_list: list[Entity]) -> None:
-        # remove com segurança iterando sobre uma cópia
         for ent in entity_list[:]:
             hp = getattr(ent, "health", None)
             if isinstance(hp, (int, float)) and hp <= 0:
-                entity_list.remove(ent)
+               if isinstance(ent, Enemy):
+                    EntityMediator.__give_score(ent, entity_list)
+               entity_list.remove(ent)
+
+

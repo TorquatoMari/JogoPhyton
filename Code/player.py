@@ -15,6 +15,21 @@ class Player(Entity):
         self.max_health = base_hp
         self.health = base_hp
 
+        self.score = 0
+
+        # i-frames
+        self.invuln_time = 0.0
+        self.invuln_max = 0.5  # ajuste fino: 0.3–0.7s
+
+    def update_timers(self, dt: float):
+        if self.invuln_time > 0.0:
+            self.invuln_time = max(0.0, self.invuln_time - dt)
+
+    def take_hit(self, dmg: int):
+        if self.invuln_time <= 0.0:
+            self.health = max(0, self.health - dmg)
+            self.invuln_time = self.invuln_max
+
 
 
     def move(self, ):
@@ -31,7 +46,7 @@ class Player(Entity):
 
     def shot(self):
         self.shot_delay-=1
-        if self.shot_delay==0:
+        if self.shot_delay<=0:
             self.shot_delay=ENTITY_SHOT_DELAY[self.name]
             pressed_key=pygame.key.get_pressed()
             if pressed_key[pygame.K_RCTRL]:
