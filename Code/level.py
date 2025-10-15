@@ -40,6 +40,8 @@ class Level:
                     shot=ent.shot()
                     if shot is not None:
                        self.entity_list.append(shot)
+                if ent.name == 'Player':
+                    self.level_text(text=f'Player - Health: {ent.health}',text_size=14,text_color=COLOR_WHITE,text_pos=(10, 25),)
             for event in pygame.event.get():
                 if event.type==pygame.QUIT:
                     pygame.quit()
@@ -47,6 +49,8 @@ class Level:
                 if event.type==EVENT_ENEMY:
                     choice=random.choice(('Enemy1','Enemy2','Enemy3'))
                     self.entity_list.append(EntityFactory.get_entity(choice))
+
+
 
 
 
@@ -68,4 +72,3 @@ class Level:
         text_surf: Surface = text_font.render(text, True, text_color).convert_alpha()
         text_rect: Rect = text_surf.get_rect(left=text_pos[0],top=text_pos[1])
         self.window.blit(source=text_surf, dest=text_rect)
-

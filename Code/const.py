@@ -6,9 +6,10 @@ import pygame
 COLOR_WHITE = (255, 255, 255)
 COLOR_BLUE  = (109, 157, 197)
 
+
 #D
 DEFAULT_HP = 50
-
+DEFAULT_DAMAGE = 10
 DEFAULT_ENEMY_SPEED = 3  # fallback, se vier um nome não mapeado
 
 #E
@@ -32,6 +33,14 @@ EVENT_ENEMY = pygame.USEREVENT + 1
 ENEMY_SCALE = 0.5
 
 ENTITY_SHOT_DELAY={'Player':20}
+
+ENTITY_DAMAGE = {
+    'Player': 0,      # o player em si não “causa dano” por contato (se for o tiro que causa)
+    'PlayerShot': 25, # dano do projétil do player
+    'Enemy1': 10,
+    'Enemy2': 12,
+    'Enemy3': 15,
+}
 
 # M
 MENU_OPTION = (

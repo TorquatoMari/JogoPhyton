@@ -7,6 +7,9 @@ from Code.entity import Entity
 class Background(Entity):
     def __init__(self,name=str,position=tuple):
         super().__init__(name=name,position=position)
+        self.damage = None
+        self.health = None
+        self.max_health = None
 
     def move(self, ):
         self.rect.centerx -=1

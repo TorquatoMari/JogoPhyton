@@ -4,7 +4,7 @@ from abc import ABC, abstractmethod
 
 import pygame
 
-from Code.const import ENTITY_HEALTH
+from Code.const import ENTITY_HEALTH, ENTITY_DAMAGE
 
 
 class Entity(ABC):
@@ -13,7 +13,9 @@ class Entity(ABC):
         self.surf = pygame.image.load('./Assets/' + name + '.png')
         self.rect = self.surf.get_rect(left=position[0],top=position[1])
         self.speed=0
-        #self.health=ENTITY_HEALTH[self.name]
+        self.damage=ENTITY_DAMAGE.get(self.name,0)
+        self.last_dmg='None'
+
 
 
     @abstractmethod
