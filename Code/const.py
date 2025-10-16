@@ -5,6 +5,8 @@ import pygame
 #C
 COLOR_WHITE = (255, 255, 255)
 COLOR_BLUE  = (109, 157, 197)
+COLOR_GREEN = (80, 200, 120)
+COLOR_RED   = (220, 70, 70)
 
 
 #D
@@ -57,6 +59,25 @@ PLAYER_SPEED = 5
 #S
 SHOT_SPEED=5
 
+
 # W
 WIN_WIDTH  = 1280
 WIN_HEIGHT = 720
+
+#S
+SCORE_POS = {
+    "Title":  (WIN_WIDTH // 2, 60),
+    "EnterName": (WIN_WIDTH // 2, 140),
+    "Label": (WIN_WIDTH // 2, 180),
+    "Name":  (WIN_WIDTH // 2, 220),
+    0: (WIN_WIDTH / 2, 110),
+    1: (WIN_WIDTH / 2, 130),
+    2: (WIN_WIDTH / 2, 150),
+    3: (WIN_WIDTH / 2, 170),
+    4: (WIN_WIDTH / 2, 190),
+    5: (WIN_WIDTH / 2, 210),
+    6: (WIN_WIDTH / 2, 230),
+    7: (WIN_WIDTH / 2, 250),
+    8: (WIN_WIDTH / 2, 270),
+    9: (WIN_WIDTH / 2, 290),
+    }
