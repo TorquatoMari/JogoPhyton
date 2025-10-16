@@ -28,5 +28,6 @@ class Enemy(Entity):
         self.rect.left, self.rect.top = left, top
 
     def move(self):
-        self.rect.centerx -= ENEMY_SPEED[self.name]
+        #self.rect.centerx -= ENEMY_SPEED[self.name]
+        self.rect.centerx -= self.speed
 

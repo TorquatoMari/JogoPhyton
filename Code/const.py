@@ -24,7 +24,7 @@ ENTITY_HEALTH = {
 ENEMY_SPEED = {
     'Enemy1': 4,
     'Enemy2': 3,
-    'Enemy3': 2,
+    'Enemy3': 5,
 }
 
 
@@ -55,7 +55,7 @@ PLAYER_SPEED = 5
 
 
 #S
-SHOT_SPEED=2
+SHOT_SPEED=5
 
 # W
 WIN_WIDTH  = 1280

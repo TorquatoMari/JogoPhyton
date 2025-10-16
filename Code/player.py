@@ -14,12 +14,14 @@ class Player(Entity):
         base_hp = ENTITY_HEALTH.get(name, DEFAULT_HP)
         self.max_health = base_hp
         self.health = base_hp
-
         self.score = 0
 
         # i-frames
         self.invuln_time = 0.0
         self.invuln_max = 0.5  # ajuste fino: 0.3–0.7s
+
+        import pygame.mixer
+        self.shoot_sound = pygame.mixer.Sound("./Assets/shot.mp3.wav")
 
     def update_timers(self, dt: float):
         if self.invuln_time > 0.0:
@@ -50,4 +52,5 @@ class Player(Entity):
             self.shot_delay=ENTITY_SHOT_DELAY[self.name]
             pressed_key=pygame.key.get_pressed()
             if pressed_key[pygame.K_RCTRL]:
+               self.shoot_sound.play()
                return PlayerShot(name=f'{self.name}Shot', position=(self.rect.centerx,self.rect.centery))
