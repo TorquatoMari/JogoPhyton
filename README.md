@@ -16,7 +16,4 @@ O projeto demonstra conceitos de **orientação a objetos**, **animações**, **
 ✅ Exibição dos melhores scores (TOP 10)  
 ✅ Interface retrô com a fonte **PressStart2P-Regular**
 
----
-
-## 🧩 Estrutura do Projeto
 
