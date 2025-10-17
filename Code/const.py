@@ -9,10 +9,11 @@ COLOR_GREEN = (80, 200, 120)
 COLOR_RED   = (220, 70, 70)
 
 
+
 #D
 DEFAULT_HP = 50
 DEFAULT_DAMAGE = 10
-DEFAULT_ENEMY_SPEED = 3  # fallback, se vier um nome não mapeado
+DEFAULT_ENEMY_SPEED = 3
 
 #E
 ENTITY_HEALTH = {
@@ -24,9 +25,9 @@ ENTITY_HEALTH = {
 
 
 ENEMY_SPEED = {
-    'Enemy1': 4,
-    'Enemy2': 3,
-    'Enemy3': 5,
+    'Enemy1': 6,
+    'Enemy2': 5,
+    'Enemy3': 7,
 }
 
 
@@ -37,8 +38,8 @@ ENEMY_SCALE = 0.5
 ENTITY_SHOT_DELAY={'Player':20}
 
 ENTITY_DAMAGE = {
-    'Player': 0,      # o player em si não “causa dano” por contato (se for o tiro que causa)
-    'PlayerShot': 25, # dano do projétil do player
+    'Player': 0,
+    'PlayerShot': 25,
     'Enemy1': 10,
     'Enemy2': 12,
     'Enemy3': 15,
@@ -52,12 +53,12 @@ MENU_OPTION = (
 )
 
 #P
-PLAYER_SPEED = 5
+PLAYER_SPEED = 7
 
 
 
 #S
-SHOT_SPEED=5
+SHOT_SPEED=10
 
 
 # W
@@ -81,3 +82,16 @@ SCORE_POS = {
     8: (WIN_WIDTH / 2, 270),
     9: (WIN_WIDTH / 2, 290),
     }
+
+ #C
+
+CONTROLS = [
+    ("↑ ↓ ← →", "Mover"),
+    ("CTRL Direito", "Atirar"),
+]
+
+CONTROLS_POS = (20, WIN_HEIGHT - 100)
+CONTROLS_LINE_SPACING = 30
+CONTROL_KEY_BG = (30, 30, 30)
+CONTROL_KEY_BORDER = (150, 150, 150)
+CONTROL_TEXT_COLOR = (230, 230, 230)

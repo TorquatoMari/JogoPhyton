@@ -18,10 +18,11 @@ class Player(Entity):
 
         # i-frames
         self.invuln_time = 0.0
-        self.invuln_max = 0.5  # ajuste fino: 0.3–0.7s
+        self.invuln_max = 0.5
 
         import pygame.mixer
         self.shoot_sound = pygame.mixer.Sound("./Assets/shot.mp3.wav")
+        self.shoot_sound.set_volume(0.2)
 
     def update_timers(self, dt: float):
         if self.invuln_time > 0.0:

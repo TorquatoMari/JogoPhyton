@@ -13,6 +13,8 @@ from Code.const import WIN_WIDTH, COLOR_WHITE, MENU_OPTION, COLOR_BLUE
 class Menu:
     def __init__(self, window):
         self.window = window
+        self.font_key = pygame.font.Font("./Assets/PressStart2P-Regular.ttf", 12)
+        self.font_text = pygame.font.Font("./Assets/PressStart2P-Regular.ttf", 14)
         self.surf = pygame.image.load('./Assets/preview-01.png')
         self.rect = self.surf.get_rect(left=0, top=0)
 
@@ -30,32 +32,57 @@ class Menu:
                     self.menu_text(text_size=20, text=MENU_OPTION[i], text_color=COLOR_BLUE,text_center_pos=((WIN_WIDTH / 2), 400 + 30 * i))
                 else:
                     self.menu_text(text_size=20, text=MENU_OPTION[i], text_color=COLOR_WHITE,text_center_pos=((WIN_WIDTH / 2), 400 + 30 * i))  # impressao dinamica
-
+            self._draw_controls()
             pygame.display.flip()
 
-            for event in pygame.event.get():  # retorna todos os eventos
-              if event.type == pygame.QUIT:  # evento de fechar janela
-                pygame.quit()  # fecha a janela
+            for event in pygame.event.get():
+              if event.type == pygame.QUIT:
+                pygame.quit()
                 quit()
 
               if event.type==pygame.KEYDOWN:
-                  if event.key==pygame.K_DOWN: #seta para baixo
+                  if event.key==pygame.K_DOWN:
                       if menu_option<len(MENU_OPTION)-1:
                           menu_option+=1
                       else:
                           menu_option=0
-                  if event.key == pygame.K_UP:  # seta para cima
+                  if event.key == pygame.K_UP:
                      if menu_option >0:
                           menu_option -= 1
                      else:
                           menu_option = len(MENU_OPTION)-1
 
-                  if event.key == pygame.K_RETURN: #Enter
+                  if event.key == pygame.K_RETURN:
                       return MENU_OPTION[menu_option]
 
+    def _draw_controls(self):
+        from Code.const import (
+            CONTROLS, CONTROLS_POS, CONTROLS_LINE_SPACING,
+            CONTROL_KEY_BG, CONTROL_KEY_BORDER, CONTROL_TEXT_COLOR
+        )
 
+        x0, y0 = CONTROLS_POS
+        key_box_w = 150
+        key_box_h = 24
+        pad = 10
 
+        for i, (key_label, desc) in enumerate(CONTROLS):
+            y = y0 + i * CONTROLS_LINE_SPACING
 
+            # Caixa da tecla
+            key_rect = pygame.Rect(x0, y, key_box_w, key_box_h)
+            pygame.draw.rect(self.window, CONTROL_KEY_BG, key_rect, border_radius=4)
+            pygame.draw.rect(self.window, CONTROL_KEY_BORDER, key_rect, width=1, border_radius=4)
+
+            # Texto da tecla (pixelado, sem antialias)
+            key_surf = self.font_key.render(key_label, False, CONTROL_TEXT_COLOR)
+            key_rect_txt = key_surf.get_rect(center=key_rect.center)
+            self.window.blit(key_surf, key_rect_txt)
+
+            # Descrição
+            desc_surf = self.font_text.render(desc, False, CONTROL_TEXT_COLOR)
+            desc_rect = desc_surf.get_rect(midleft=(x0 + key_box_w + pad, y + key_box_h // 2))
+            self.window.blit(desc_surf, desc_rect)
 
     def menu_text(self, text_size: int, text: str, text_color: tuple, text_center_pos: tuple):
           text_font: Font = pygame.font.Font("./Assets/PressStart2P-Regular.ttf", size=text_size)
